@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Attack Risk Prediction</title>
+    <style>
+        /* Reset default styles and set basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, rgba(1, 5, 16, 1), rgba(13, 44, 88, 1)), url('background-image.jpg') no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #d6d6d6;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 15px;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"],
+        select {
+            width: calc(100% - 20px); /* Adjusted width for better alignment */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            appearance: none;
+            padding-right: 25px;
+            background-image: linear-gradient(45deg, transparent 50%, #ccc 50%), linear-gradient(135deg, #ccc 50%, transparent 50%);
+            background-position: calc(100% - 12px) calc(0.5em + 2px), calc(100% - 8px) calc(0.5em + 2px);
+            background-size: 8px 8px, 8px 8px;
+            background-repeat: no-repeat;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .message strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Attack Risk Prediction</h1>
+        <h2>User Details </h2>
+       <h3>{{ session['email'] }}</h3>
+        {% if user_details %}
+
+            <p><strong>Age:</strong> {{ user_details.age }}</p>
+            <p><strong>Sex:</strong> {{ user_details.sex }}</p>
+            <p><strong>Diabetes:</strong> {{ user_details.diabetes }}</p>
+            <p><strong>Family History:</strong> {{ user_details.famhistory }}</p>
+            <p><strong>Smoking:</strong> {{ user_details.smoking }}</p>
+            <p><strong>Obesity:</strong> {{ user_details.obesity }}</p>
+            <p><strong>Alcohol:</strong> {{ user_details.alcohol }}</p>
+            <p><strong>Exercise Hours:</strong> {{ user_details.exercise_hours }}</p>
+            <p><strong>Diet:</strong> {{ user_details.diet }}</p>
+            <p><strong>Heart Problem:</strong> {{ user_details.heart_problem }}</p>
+            <p><strong>BMI:</strong> {{ user_details.bmi }}</p>
+            <p><strong>Physical Activity:</strong> {{ user_details.physical_activity }}</p>
+            <p><strong>Sleep Hours:</strong> {{ user_details.sleep_hours }}</p>
+            <p><strong>Blood Pressure Systolic:</strong> {{ user_details.blood_pressure_systolic }}</p>
+            <p><strong>Blood Pressure Diastolic:</strong> {{ user_details.blood_pressure_diastolic }}</p>
+           
+        {% else %}
+            <p class="message">No user details found.</p>
+        {% endif %}
+        
+        <form action="/predict" method="post">
+            <label for="heart_rate">Heart Rate:</label>
+            <input type="number" id="heart_rate" name="heart_rate" required>
+            
+            <label for="stress_level">Stress Level:</label>
+            <input type="number" id="stress_level" name="stress_level" required>
+            <label for="hrv">HRV:</label>
+            <input type="number" id="hrv" name="hrv" required>
+            
+            <label for="spo2">SpO2:</label>
+            <input type="number" id="spo2" name="spo2" required>
+            
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
